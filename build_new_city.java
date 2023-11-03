@@ -17,11 +17,11 @@ https://school.programmers.co.kr/learn/courses/30/lessons/86053
   만약 오버플로우까지 고려해야하는 테스트케이스가 있었다면 tmp, gold, silver, either 변수를 BigInteger로 수정해야했을거 같다.
 
   ++ 다른 정답을 리뷰
-  추가 메모리 없이, Arrays.sort 메소드 사용해서 정렬!
+  정렬! 해보기
   int node[][] = new int[n][4];
   for(int i=0; i<n; i++)
-	node[i] = new int[] {g[i], s[i], w[i], t[i]}; //추가적인 메모리 없이 배열로 묶기
-  Arrays.sort(node, (o1,o2) -> o1[3]-o2[3]); // 정렬
+	node[i] = new int[] {g[i], s[i], w[i], t[i]}; // 메모리 비효율적이지만 가능?하네?
+  Arrays.sort(node, (o1,o2) -> o1[3]-o2[3]); // 정렬 compare 선언
 
   수송량 계산 방식 개선 가능!
   기존: 금과은의 최소 수송량, 나머지는 둘중 어떤것이든 수송량
