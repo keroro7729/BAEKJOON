@@ -15,6 +15,17 @@ https://school.programmers.co.kr/learn/courses/30/lessons/86053
   최악의 경우를 가정하면 t 시간은 1인데 w 거리는 최대값(10^9)일 때 오버플로우가 발생하지 않으려면 end 초기값은 Long.MAX_VALUE / 500000000 -1 이여야 한다.
   테스트 케이스가 이런 최악의 경우는 없고, 정답값이 큰 경우가 있는거 같다. Long.MAX_VALUE/5000로 초기화해서 모든 테스트케이스를 통과했다.
   만약 오버플로우까지 고려해야하는 테스트케이스가 있었다면 tmp, gold, silver, either 변수를 BigInteger로 수정해야했을거 같다.
+
+  ++ 다른 정답을 리뷰
+  추가 메모리 없이, Arrays.sort 메소드 사용해서 정렬!
+  int node[][] = new int[n][4];
+  for(int i=0; i<n; i++)
+	node[i] = new int[] {g[i], s[i], w[i], t[i]}; //추가적인 메모리 없이 배열로 묶기
+  Arrays.sort(node, (o1,o2) -> o1[3]-o2[3]); // 정렬
+
+  수송량 계산 방식 개선 가능!
+  기존: 금과은의 최소 수송량, 나머지는 둘중 어떤것이든 수송량
+  개선: 금, 은, 금+은의 최대 수송량을 각각 계산 후 세조건이 만족하는지 검사 (금량 >= a, 은량 >= b, 금+은량 >= a+b)
 */
 
 import java.util.*;
