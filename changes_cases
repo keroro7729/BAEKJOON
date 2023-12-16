@@ -1,0 +1,44 @@
+/*
+코딩테스트 연습 > 연습문제 > 거스름돈
+https://school.programmers.co.kr/learn/courses/30/lessons/12907
+  0번 ~ i번 까지의 화폐으로 n의 돈을 거슬러주는 경우의 수를 memo[i][n]으로 정의했다.
+  memo[i][n] = memo[i-1][n] + memo[i][n-money[i]] 이다.
+  i번 화폐는 하나도 쓰지 않고 0~i-1번 화폐만 써서 주는 경우의 수 +
+  i번 화폐를 하나 무조건 쓰고(n - monty[i]), 0~i번 화폐를 써서 주는 경우의 수
+
+  top-down방식으로는 시간초과가 걸려서 조금 해맸던 문제였다.
+  모든 경우를 전부 구하는 것 보다, top-down방식으로 필요한 경우만 계산하는 것이 좋을 것 같았는데
+  오히려 top-down방식에서는 memo[i][n]이 바로 계산 되지 않고 
+  다음 memo[i-1][n], memo[i][n-money[i]]도 계속해서 재귀함수를 호출하며 계산하다 보니
+  오히려 시간측면에서 굉장히 비효율적이였다.
+*/
+
+import java.util.*;
+
+class Solution {
+    public int solution(int n, int[] money) {
+        this.money = money;
+        set_memo(n);
+        return memo[money.length-1][n];
+    }
+    
+    int money[], CUT = 1000000007;
+    int[][] memo;
+    public void set_memo(int n) {
+    	int size = money.length;
+    	memo = new int[size][n+1];
+    	for(int i=0; i<=n; i++)
+    		memo[0][i] = (i%money[0] == 0 ? 1 : 0);
+    	
+    	for(int i=1; i<size; i++) {
+    		for(int j=0; j<=n; j++) {
+    			if(j<money[i]) {
+    				memo[i][j] = memo[i-1][j];
+    			}
+    			else {
+    				memo[i][j] = memo[i][j-money[i]] + memo[i-1][j];
+    			}
+    		}
+    	}
+    }
+}
